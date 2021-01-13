@@ -10,7 +10,7 @@ RUN apt-get update -qq && \
   libpq-dev \
   nodejs \
   vim \
-  sqlite3
+  default-mysql-client 
 
 WORKDIR /app
 
