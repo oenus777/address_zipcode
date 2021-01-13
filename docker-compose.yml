@@ -1,0 +1,36 @@
+version: "3"
+services:
+  app:
+    build: .
+    command: /bin/sh -c "rm -f tmp/pids/sever.pid && bundle exec puma -C config/puma.rb"
+    ports:
+      - "3000:3000"
+    restart: always
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+      - public-data:/app/public
+      - tmp-data:/app/tmp
+      - log-data:/app/log
+  db:
+    image: mysql:5.7.28
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: app_development
+    ports:
+      - "3306:3306"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  web:
+    build: ./nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - tmp-data:/app/tmp
+    depends_on:
+      - app
+volumes:
+  public-data:
+  tmp-data:
+  log-data:
