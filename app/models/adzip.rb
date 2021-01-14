@@ -1,0 +1,2 @@
+class Adzip < ApplicationRecord
+end

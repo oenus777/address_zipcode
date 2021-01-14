@@ -133,6 +133,10 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    roo (2.8.3)
+      nokogiri (~> 1)
+      rubyzip (>= 1.3.0, < 3.0.0)
+    rubyzip (2.3.0)
     spring (2.1.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -161,6 +165,7 @@ DEPENDENCIES
   mysql2 (>= 0.4.4)
   puma (~> 5.0)
   rails (~> 6.1.1)
+  roo
   spring
   tzinfo-data
 
