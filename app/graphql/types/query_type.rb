@@ -8,7 +8,11 @@ module Types
     
     #郵便番号を引数として与えテーブルを参照
     def zipad(zipcode:)
-      zipcode.tr('０-９ａ-ｚＡ-Ｚ','0-9a-zA-Z')   #全角から半角へ変換
+      if zipcode.length > 8
+        raise GraphQL::ExecutionError.new('８文字以下で入力してください。（ハイフン含まない場合は７文字以下）', extensions: {zipcode: "与えられた文字数が多すぎます。"})
+      end
+      zipcode = zipcode.tr('零一二三四五六七八九',  '0123456789')   #漢数字から数字へ変換
+      zipcode = zipcode.tr('０-９ａ-ｚＡ-Ｚ','0-9a-zA-Z')   #全角から半角へ変換
       if zipcode.include?('-')   #ハイフン表記ある場合、表記なしへ変換
         zipcode = zipcode.gsub('-','')
       elsif zipcode.length < 7   #前０を省略した場合、前０を足りない分だけ追加
