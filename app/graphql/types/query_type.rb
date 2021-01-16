@@ -65,7 +65,7 @@ module Types
       
       #抽出したキーを部分一致で参照する
       result = Adzip.where('address3 like ?',"%#{separates[1]}%")
-      if result.nil?
+      if result.blank?
         raise GraphQL::ExecutionError.new('引数に正しい住所を入力してください。', extensions: {address: "該当する住所がございません。"})
       else
         result
