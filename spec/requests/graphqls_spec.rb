@@ -185,6 +185,42 @@ RSpec.describe Types::QueryType do
         assert_equal (result["errors"][0]["extensions"]["address"]), "該当する住所がございません。"
       end
       
+      it "引数が都道府県のみの場合、nilを返し、エラーメッセージも返す" do
+        query_string = <<-GRAPHQL
+        query($address: String!) {
+          adzip(address: $address) {
+            zipcode
+            address1
+            address2
+            address3
+          }
+        }
+        GRAPHQL
+        variables = { address: "新潟県" }
+        result = AppSchema.execute(query_string, context: {}, variables: variables )
+        assert_nil (result["data"]["adzip"])
+        assert_equal (result["errors"][0]["message"]), "引数に字（あざ）を入力してください。"
+        assert_equal (result["errors"][0]["extensions"]["address"]), "字（あざ）が存在しません。"
+      end
+      
+      it "引数が市区町村のみの場合、nilを返し、エラーメッセージも返す" do
+        query_string = <<-GRAPHQL
+        query($address: String!) {
+          adzip(address: $address) {
+            zipcode
+            address1
+            address2
+            address3
+          }
+        }
+        GRAPHQL
+        variables = { address: "三条市" }
+        result = AppSchema.execute(query_string, context: {}, variables: variables )
+        assert_nil (result["data"]["adzip"])
+        assert_equal (result["errors"][0]["message"]), "引数に字（あざ）を入力してください。"
+        assert_equal (result["errors"][0]["extensions"]["address"]), "字（あざ）が存在しません。"
+      end
+      
       it "住所が字（あざ）のみの場合、正しい郵便番号を返す" do
         query_string = <<-GRAPHQL
         query($address: String!) {
