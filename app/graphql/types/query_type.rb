@@ -60,7 +60,12 @@ module Types
         end
       end
       
-      #上記で抽出できない場合、引数をキーとする
+      #都道府県のみや市区町村のみの引数の場合、エラーメッセージ返す。
+      if separates[1] == ""
+        raise GraphQL::ExecutionError.new('引数に字（あざ）を入力してください。', extensions: {address: "字（あざ）が存在しません。"})
+      end
+      
+      #字（あざ）のみの場合、引数をキーとする
       separates = Array.new(2,address) if separates.blank?
       
       #抽出したキーを部分一致で参照する
