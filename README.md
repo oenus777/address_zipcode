@@ -10,7 +10,7 @@
 ## リクエスト方法
   
   ①下記URLのテストクライアントにアクセスしクエリをリクエストする。  
-  URL:http://www.adzip20200101.xyz/  
+  http://www.adzip20200101.xyz/  
     
   ②下記エンドポイントへPOSTリクエストをクエリと共にリクエストする。  
   http://adzip20200101.xyz/graphql  
@@ -66,6 +66,17 @@
   address1: 住所の都道府県（漢字、ひらがな）  
   address2: 住所の市区町村（漢字、ひらがな）  
   address3: 住所の字（漢字、ひらがな)  
+    
+## 開発者へ  
+  
+  Typesの定義はapp/graphql/adzip_types.rb  
+  Resolverの定義はapp/graphql/query_types.rb  
+  上記で実装しています。  
+  またgraphql-rubyの基本的な使い方に沿って実装。  
+  ですので基本的な使い方が分かればメンテナンスしやすくアレンジ可能です。  
+  参考URL:https://qiita.com/k-penguin-sato/items/07fef2f26fd6339e0e69  
+  
+  
   
     
     
