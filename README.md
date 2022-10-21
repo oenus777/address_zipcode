@@ -10,14 +10,14 @@
 ## リクエスト方法
   
   ①下記URLのテストクライアントにアクセスしクエリをリクエストする。  
-  http://www.adzip20200101.xyz/  
+  localhost:3000  
     
   ②下記エンドポイントへPOSTリクエストをクエリと共にリクエストする。  
-  http://adzip20200101.xyz/graphql  
+  localhost:3000/graphql  
     
   例  
   ```
-  curl -XPOST -d 'query=query { zipad(zipcode: "9550056") { address1 address2 address3 } }  http://www.adzip20200101.xyz/graphql  
+  curl -XPOST -d 'query=query { zipad(zipcode: "9550056") { address1 address2 address3 } }  localhost:3000/graphql  
   ```
   
   
